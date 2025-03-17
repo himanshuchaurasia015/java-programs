@@ -29,18 +29,21 @@ public class CombinationSum2 {
     static void combinationSum(int i, int target, int[] arr, ArrayList<Integer> temp,
             ArrayList<ArrayList<Integer>> result) {
         if (target == 0) {
-            if (!result.contains(temp))
-                result.add(new ArrayList<>(temp));
+            // if (!result.contains(temp))
+            result.add(new ArrayList<>(temp));
         }
         if (i >= arr.length || target < 0) {
             return;
         }
-        temp.add(arr[i]);
-        for (int j = i + 1; j < arr.length; j++) {
-            combinationSum(j, target - arr[i], arr, temp, result);
+        int curr = arr[i];
+        for (int j = i; j < arr.length; j++) {
+            if (j == i || curr != arr[j]) {
+                curr = arr[j];
+                temp.add(arr[j]);
+                combinationSum(j + 1, target - arr[j], arr, temp, result);
+                temp.remove(temp.size() - 1);
+            }
         }
-        temp.remove(temp.size() - 1);
-        combinationSum(i + 1, target, arr, temp, result);
 
     }
 
