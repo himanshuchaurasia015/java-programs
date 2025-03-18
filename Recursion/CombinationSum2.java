@@ -37,12 +37,15 @@ public class CombinationSum2 {
         }
         int curr = arr[i];
         for (int j = i; j < arr.length; j++) {
-            if (j == i || curr != arr[j]) {
-                curr = arr[j];
-                temp.add(arr[j]);
-                combinationSum(j + 1, target - arr[j], arr, temp, result);
-                temp.remove(temp.size() - 1);
-            }
+            if (j > i && arr[j] == arr[j - 1])
+                continue; // Skip duplicates
+
+            if (arr[j] > target)
+                break; // No need to continue if current number is greater than target
+            temp.add(arr[j]);
+            combinationSum(j + 1, target - arr[j], arr, temp, result);
+            temp.remove(temp.size() - 1);
+
         }
 
     }
