@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class SubsetSun {
+public class SubsetSum {
     public static void main(String[] args) {
         System.out.println("enter size of arr");
         Scanner sc = new Scanner(System.in);

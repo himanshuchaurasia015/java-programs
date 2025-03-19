@@ -7,7 +7,6 @@ public class Subsequence {
     static void subsequence(int i, int[] arr, ArrayList<ArrayList<Integer>> result, ArrayList<Integer> temp) {
         if (i == arr.length) {
             result.add(new ArrayList<Integer>(temp));
-            // System.out.print(temp + " ");
             return;
         }
 
