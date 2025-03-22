@@ -1,7 +1,7 @@
 package Recursion;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SubsetSum {
@@ -16,21 +16,32 @@ public class SubsetSum {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = Integer.parseInt(input[i]);
         }
-        HashSet<Integer> result = new HashSet<>();
+        ArrayList<Integer> result = new ArrayList<>();
         Arrays.sort(arr);
         solve(0, 0, arr, result);
         System.out.println(result);
+        System.out.println(result.size());
+
         sc.close();
     }
 
-    static void solve(int i, int sum, int[] arr, HashSet<Integer> result) {
+    static void solve(int i, int sum, int[] arr, ArrayList<Integer> result) {
 
-        result.add(sum);
-        if (i >= arr.length) {
+        if (i == arr.length) {
+            result.add(sum);
+
             return;
         }
+        // optimized
+        // for (int j = i; j < arr.length; j++) {
+        // if (j > i && arr[j] == arr[j - 1]) {
+        // continue;
+        // }
+        // solve(j + 1, sum + arr[j], arr, result);
 
+        // }
         solve(i + 1, sum + arr[i], arr, result);
+
         solve(i + 1, sum, arr, result);
 
     }

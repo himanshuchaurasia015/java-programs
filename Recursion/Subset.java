@@ -22,6 +22,8 @@ public class Subset {
         Arrays.sort(arr);
         solve(0, new ArrayList<Integer>(), arr, result);
         System.out.println(result);
+        System.out.println(result.size());
+
         sc.close();
     }
 
@@ -31,7 +33,8 @@ public class Subset {
         result.add(new ArrayList<>(temp));
 
         for (int j = i; j < arr.length; j++) {
-            // if (j > i && arr[j] == arr[j - 1])
+            //for unique subset
+            // if (j > i && arr[j] == arr[j - 1]) 
             // continue;
             temp.add(arr[j]);
             solve(j + 1, temp, arr, result);

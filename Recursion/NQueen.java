@@ -13,6 +13,8 @@ public class NQueen {
             Arrays.fill(is, 0);
 
         }
+        solveALL(0, n, arr);
+
         solve(0, n, arr);
         for (int[] is : arr) {
             System.out.println(Arrays.toString(is));
@@ -22,74 +24,26 @@ public class NQueen {
 
     private static boolean help(int i, int j, int n, int[][] arr) {
         // t
-        if (i > 0) {
-            for (int k = i - 1; k >= 0; k--) {
-                if (arr[k][j] == 1) {
-                    return false;
-                }
-            }
-        }
-        // b
-        if (i < n - 1) {
-            for (int k = i + 1; k < n; k++) {
-                if (arr[k][j] == 1) {
-                    return false;
-                }
-            }
-        }
-        // l
-        if (j > 0) {
-            for (int k = j - 1; k >= 0; k--) {
-                if (arr[i][k] == 1) {
-                    return false;
-                }
-            }
-        }
-        // r
-        if (j < n - 1) {
-            for (int k = j + 1; k < n; k++) {
-                if (arr[i][k] == 1) {
-                    return false;
-                }
+        // Check column above
+        for (int row = 0; row < i; row++) {
+            if (arr[row][j] == 1) {
+                return false;
             }
         }
 
-        // tl
-        int r = i, c = j;
-        while (r >= 0 && r < n && c >= 0 && c < n) {
-            if (arr[r][c] == 1)
+        // Check top-left diagonal
+        for (int row = i, col = j; row >= 0 && col >= 0; row--, col--) {
+            if (arr[row][col] == 1) {
                 return false;
-            r--;
-            c--;
-        }
-        // tr
-        r = i;
-        c = j;
-        while (r >= 0 && r < n && c >= 0 && c < n) {
-            if (arr[r][c] == 1)
-                return false;
-            r--;
-            c++;
-        }
-        r = i;
-        c = j;
-        // bl
-        while (r >= 0 && r < n && c >= 0 && c < n) {
-            if (arr[r][c] == 1)
-                return false;
-            r++;
-            c--;
-        }
-        r = i;
-        c = j;
-        // br
-        while (r >= 0 && r < n && c >= 0 && c < n) {
-            if (arr[r][c] == 1)
-                return false;
-            r++;
-            c++;
+            }
         }
 
+        // Check top-right diagonal
+        for (int row = i, col = j; row >= 0 && col < n; row--, col++) {
+            if (arr[row][col] == 1) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -108,6 +62,26 @@ public class NQueen {
 
         }
         return false;
+
+    }
+
+    private static void solveALL(int i, int n, int[][] arr) {
+        if (i == n) {
+            for (int[] is : arr) {
+                System.out.println(Arrays.toString(is));
+            }
+            System.out.println("--------------------------------------");
+            return;
+        }
+        for (int j = 0; j < arr.length; j++) {
+            if (help(i, j, n, arr)) {
+                arr[i][j] = 1;
+                solveALL(i + 1, n, arr);
+                arr[i][j] = 0;
+
+            }
+
+        }
 
     }
 }
