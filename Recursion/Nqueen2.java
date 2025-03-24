@@ -74,8 +74,7 @@ public class Nqueen2 {
 
     }
 
-    // <----------------------------------------------optimized
-    // solution--------------------------------------------------->
+    // <Optimized------------------------------------------------------------------->
 
     private static boolean helpopt(int i, int j, int n, int[] right, int[] left, int[] col, int[][] arr) {
         if (right[i + j] != 0 || left[i - j + n - 1] != 0 || col[j] != 0) {
@@ -84,7 +83,6 @@ public class Nqueen2 {
         right[i + j] = 1;
         left[i - j + n - 1] = 1;
         col[j] = 1;
-
         return true;
     }
 
@@ -133,7 +131,7 @@ public class Nqueen2 {
 
     }
 
-    // <------------------------------------------------------------------------------------------------------------->
+    // <Solution------------------------------------------------------------------------------------------------------------->
 
     private static void solveALL(int i, int n, int[][] arr) {
         if (i == n) {
